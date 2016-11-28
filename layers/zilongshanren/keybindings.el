@@ -108,9 +108,8 @@
 (spacemacs/declare-prefix "ot" "Toggle")
 
 
-(if (configuration-layer/layer-usedp 'helm)
-    (progn (global-set-key (kbd "<f1>") 'zilongshanren/helm-hotspots)
-           (spacemacs/set-leader-keys "oo" 'zilongshanren/helm-hotspots)))
+(global-set-key (kbd "<f1>") 'zilongshanren/helm-hotspots)
+(spacemacs/set-leader-keys "oo" 'zilongshanren/helm-hotspots)
 
 (spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
 (spacemacs/set-leader-keys "op" 'zilongshanren/org-save-and-export)
@@ -129,18 +128,16 @@
 (spacemacs/set-leader-keys "ox" 'org-open-at-point)
 (spacemacs/set-leader-keys "oac" 'zilongshanren/browser-refresh--chrome-applescript)
 
-;; helm specific keybindings
-(if (configuration-layer/layer-usedp 'helm)
-    (progn
-      (spacemacs/set-leader-keys "rh" 'helm-resume)
-      (spacemacs/set-leader-keys "sj" 'counsel-imenu)))
+(spacemacs/set-leader-keys "rh" 'helm-resume)
+(spacemacs/set-leader-keys "sj" 'counsel-imenu)
 
 ;; ivy specific keybindings
 (if (configuration-layer/layer-usedp 'ivy)
     (progn
       (spacemacs/set-leader-keys "ff" 'counsel-find-file)
       (spacemacs/set-leader-keys "fL" 'counsel-locate)
-      (spacemacs/set-leader-keys "hi" 'counsel-info-lookup-symbol)))
+      (spacemacs/set-leader-keys "hi" 'counsel-info-lookup-symbol)
+      (spacemacs/set-leader-keys "pb" 'projectile-switch-to-buffer)))
 
 (spacemacs/set-leader-keys "en" 'flycheck-next-error)
 (spacemacs/set-leader-keys "ep" 'flycheck-previous-error)
@@ -149,7 +146,7 @@
 (spacemacs/set-leader-keys "gL" 'magit-log-buffer-file)
 (spacemacs/set-leader-keys "og" 'my-git-timemachine)
 
-(spacemacs/set-leader-keys "sj" 'helm-imenu)
+(spacemacs/set-leader-keys "sj" 'zilongshanren/counsel-imenu)
 ;; deal with BOM
 (spacemacs/set-leader-keys "fl" 'find-file-literally-at-point)
 (spacemacs/set-leader-keys "ri" 'ivy-resume)
@@ -165,7 +162,8 @@
 
 (spacemacs/set-leader-keys "pa" 'projectile-find-other-file)
 (spacemacs/set-leader-keys "pA" 'projectile-find-other-file-other-window)
-
+(spacemacs/set-leader-keys ":" 'counsel-M-x)
+(spacemacs/set-leader-keys "TAB" 'spacemacs/alternate-buffer-in-persp)
 
 (when (spacemacs/system-is-mswindows)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)

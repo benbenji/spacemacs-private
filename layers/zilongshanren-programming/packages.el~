@@ -252,8 +252,12 @@
     :diminish (lispy-mode)
     :init
     (progn
+<<<<<<< HEAD
       ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1))) 我加的
+=======
 
+      (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+>>>>>>> 0e974c86c0e7b41a51f924a19d1b998ad389fe23
       (add-hook 'ielm-mode-hook (lambda () (lispy-mode 1)))
       (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
       ;; (add-hook 'spacemacs-mode-hook (lambda () (lispy-mode 1)))
