@@ -5,7 +5,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ahs-case-fold-search nil t)
+ '(ahs-case-fold-search nil)
  '(command-log-mode-window-size 50)
  '(company-dabbrev-minimum-length 3)
  '(company-dabbrev-other-buffers nil)
@@ -27,10 +27,12 @@
  '(helm-buffer-max-length 56)
  '(helm-move-to-line-cycle-in-source t)
  '(ivy-height 18)
+ '(js2-highlight-external-variables t)
  '(lua-documentation-url "http://www.lua.org/manual/5.3/manual.html")
  '(magit-use-overlays nil)
  '(only-global-abbrevs t)
  '(org-agenda-custom-commands nil)
+ '(org-agenda-files nil)
  '(org-agenda-ndays 1)
  '(org-agenda-show-all-dates t)
  '(org-agenda-skip-deadline-if-done t)
@@ -71,7 +73,7 @@
  '(git-gutter-fr:added ((t (:foreground "#859900" :weight bold :width extra-expanded))))
  '(iedit-occurrence ((t (:inherit cursor))))
  '(ivy-virtual ((t (:background "skyblue"))))
- '(js2-external-variable ((t (:foreground "plum3"))))
+ '(js2-external-variable ((t (:foreground "deep sky blue"))))
  '(mc/cursor-bar-face ((t (:background "chartreuse3"))))
  '(show-paren-match ((t (:background "dark gray" :foreground "#d33682" :weight bold))))
  '(sp-show-pair-match-face ((t (:background "#272822" :foreground "gray" :inverse-video t :weight normal)))))
