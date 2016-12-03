@@ -99,27 +99,23 @@ values."
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages
    '(magit-gh-pulls magit-gitflow org-projectile evil-mc
-                    evil-args evil-ediff evil-exchange evil-unimpaired
-                    evil-indent-plus volatile-highlights smartparens
-                    spaceline holy-mode skewer-mode rainbow-delimiters
-                    highlight-indentation vi-tilde-fringe eyebrowse
-                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode git-gutter git-gutter-fringe  evil-escape
-                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum
-                    ac-ispell ace-jump-mode auto-complete auto-dictionary
-                    clang-format define-word google-translate disaster epic
-                    fancy-battery neotree org-present orgit orglue spacemacs-theme
-                    helm-flyspell flyspell-correct-helm clean-aindent-mode
-                    helm-c-yasnippet ace-jump-helm-line helm-make
-                    ;;<<<<<<< HEAD
-                    ;;                     (global-set-key [tab] 'tab-indent-or-complete)   helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ;;                        ido-vertical-mode flx-ido company-quickhelp)
-                    ;;=======
-                    helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido company-quickhelp
-                    window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
-                    )
-   ;;>>>>>>> 0e974c86c0e7b41a51f924a19d1b998ad389fe23
+                        evil-args evil-ediff evil-exchange evil-unimpaired
+                        evil-indent-plus volatile-highlights smartparens
+                        spaceline holy-mode skewer-mode rainbow-delimiters
+                        highlight-indentation vi-tilde-fringe eyebrowse
+                        org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                        livid-mode git-gutter git-gutter-fringe  evil-escape
+                        leuven-theme gh-md evil-lisp-state spray lorem-ipsum
+                        ac-ispell ace-jump-mode auto-complete auto-dictionary
+                        clang-format define-word google-translate disaster epic
+                        fancy-battery neotree org-present orgit orglue spacemacs-theme
+                        helm-flyspell flyspell-correct-helm clean-aindent-mode
+                        helm-c-yasnippet ace-jump-helm-line helm-make
+                        helm-themes helm-swoop helm-spacemacs-help smeargle
+                        ido-vertical-mode flx-ido company-quickhelp counsel-projectile
+                        window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
+                        )
+
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
 
