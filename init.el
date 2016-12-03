@@ -374,7 +374,6 @@ values."
   (setq ycmd-global-config "/home/liguo/ycmd/cpp/ycm/.ycm_extra_conf.py")
   (require 'company-ycmd)
   (company-ycmd-setup)
-
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
@@ -437,7 +436,6 @@ values."
           (untabify (match-beginning 0) (match-end 0)))
         (when (looking-at (concat "^" (make-string tab-width ?\ )))
           (replace-match "")))))
-
   (defun zilongshanren/toggle-major-mode ()
     (interactive)
     (if (eq major-mode 'fundamental-mode)
@@ -525,3 +523,4 @@ values."
 (global-set-key [tab] 'tab-indent-or-complete)
 (global-set-key [(control return)] 'company-complete-common)
 ;;(define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
+ (define-key magit-mode-map [tab] 'magit-section-toggle)
