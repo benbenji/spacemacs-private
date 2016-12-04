@@ -519,7 +519,6 @@ values."
 (global-set-key [tab] 'tab-indent-or-complete)
 (global-set-key [(control return)] 'company-complete-common)
 ;;(define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
-;;(require 'magit-section)
-;;(define-key magit-mode-map [tab] 'magit-section-toggle)
 (add-hook 'magit-status-mode-hook (lambda()
                                       (define-key magit-mode-map [tab] 'magit-section-toggle)))
+
