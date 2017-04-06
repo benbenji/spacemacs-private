@@ -31,14 +31,18 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     octave
      ivy
+     latex
      better-defaults
+     ipython-notebook
      github
      ranger
      colors
      prodigy
      search-engine
      graphviz
+     makefile
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
@@ -95,6 +99,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(sicp)
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages
@@ -114,7 +119,7 @@ values."
                         helm-themes helm-swoop helm-spacemacs-help smeargle
                         ido-vertical-mode flx-ido company-quickhelp counsel-projectile
                         window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
-                        )
+                                               )
 
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
@@ -365,9 +370,9 @@ values."
   (require 'ycmd)
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (add-hook 'c-mode-hook 'ycmd-mode)
-  (setq ycmd-server-command '("python2" "/home/liguo/ycmd/ycmd"))
+  (setq ycmd-server-command '("python2" "/home/yuebenben/ycmd/ycmd"))
   ;; (setq ycmd-extra-conf-whitelist '("~/work/gitlab/gitlab.com/mystudy/mongodb/code/*"))
-  (setq ycmd-global-config "/home/liguo/ycmd/cpp/ycm/.ycm_extra_conf.py")
+  (setq ycmd-global-config "/home/yuebenben/ycmd/cpp/ycm/.ycm_extra_conf.py")
   (require 'company-ycmd)
   (company-ycmd-setup)
   (when (configuration-layer/layer-usedp 'chinese)
@@ -521,4 +526,9 @@ values."
 ;;(define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
 (add-hook 'magit-status-mode-hook (lambda()
                                       (define-key magit-mode-map [tab] 'magit-section-toggle)))
-
+    ;; use apsell as ispell backend
+    (setq-default ispell-program-name "aspell")
+    ;; use American English as ispell default dictionary
+    (ispell-change-dictionary "american" t)
+(add-hook 'octave-mode-hook (lambda()
+                              company-mode))

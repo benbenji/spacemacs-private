@@ -14,6 +14,7 @@
 
 (setq zilongshanren-programming-packages
       '(
+        auctex
         css-mode
         paredit
         lispy
