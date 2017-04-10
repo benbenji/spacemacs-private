@@ -1,0 +1,3 @@
+[submodule "local/helm-ros"]
+	path = local/helm-ros
+	url = git@github.com:davidlandry93/helm-ros

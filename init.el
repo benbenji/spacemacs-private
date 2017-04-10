@@ -71,6 +71,7 @@ values."
      shaders
      yaml
      ycmd
+     spaceros
      syntax-checking
      react
      (python :variables
@@ -97,7 +98,8 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(sicp)
+   dotspacemacs-additional-packages '(sicp helm-ros
+                                           )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -181,8 +183,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark)
+   dotspacemacs-themes '(spacemacs-dark
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -443,7 +445,7 @@ values."
       (fundamental-mode)))
   (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
-  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+  (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/7749
   (defun spacemacs/ivy-persp-switch-project (arg)
@@ -464,6 +466,10 @@ values."
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
+
+(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
+(require 'rosemacs-config)
+;;(require 'slime-config "~/catkin_ws/install/share/slime_ros/slime-config.el")
 (defun check-expansion ()
   (save-excursion
     (if (looking-at "\\_>") t
@@ -531,3 +537,6 @@ values."
     (ispell-change-dictionary "american" t)
 (add-hook 'octave-mode-hook (lambda()
                               company-mode))
+;; (add-hook 'c++-mode-hook(lambda()
+;;                              (add-to-list 'yas-snippet-dirs "/opt/ros/kinetic/share/emacs/site-lisp/snippets"))
+;;                              )
