@@ -32,6 +32,7 @@ values."
    dotspacemacs-configuration-layers
    '(
      octave
+     stardict
      ivy
      latex
      better-defaults
@@ -96,31 +97,30 @@ values."
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
-   ;; packages, then consider creating a layer. You can also put the
+   ;; packages, then consider creating a layer. Youjcan also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(sicp helm-ros
-                                           )
+   dotspacemacs-additional-packages '(sicp helm-ros)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages
    '(magit-gh-pulls magit-gitflow org-projectile evil-mc
-                        evil-args evil-ediff evil-exchange evil-unimpaired
-                        evil-indent-plus volatile-highlights smartparens
-                        spaceline holy-mode skewer-mode rainbow-delimiters
-                        highlight-indentation vi-tilde-fringe eyebrowse
-                        org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                        livid-mode git-gutter git-gutter-fringe  evil-escape
-                        leuven-theme gh-md evil-lisp-state spray lorem-ipsum
-                        ac-ispell ace-jump-mode auto-complete auto-dictionary
-                        clang-format define-word google-translate disaster epic
-                        fancy-battery neotree org-present orgit orglue spacemacs-theme
-                        helm-flyspell flyspell-correct-helm clean-aindent-mode
-                        helm-c-yasnippet ace-jump-helm-line helm-make
-                        helm-themes helm-swoop helm-spacemacs-help smeargle
-                        ido-vertical-mode flx-ido company-quickhelp counsel-projectile
-                        window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
-                                               )
+                    evil-args evil-ediff evil-exchange evil-unimpaired
+                    evil-indent-plus volatile-highlights smartparens
+                    spaceline holy-mode skewer-mode rainbow-delimiters
+                    highlight-indentation vi-tilde-fringe eyebrowse
+                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum
+                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+                    clang-format define-word google-translate disaster epic
+                    fancy-battery neotree org-present orgit orglue spacemacs-theme
+                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                    helm-c-yasnippet ace-jump-helm-line helm-make
+                    helm-themes helm-swoop helm-spacemacs-help smeargle
+                    ido-vertical-mode flx-ido company-quickhelp counsel-projectile
+                    window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
+                    )
 
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
@@ -371,6 +371,7 @@ values."
   (require 'ycmd)
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (add-hook 'c-mode-hook 'ycmd-mode)
+  ;; (add-hook 'python-mode-hook 'ycmd-mode)
   (setq ycmd-server-command '("python2" "/home/yuebenben/ycmd/ycmd"))
   ;; (setq ycmd-extra-conf-whitelist '("~/work/gitlab/gitlab.com/mystudy/mongodb/code/*"))
   (setq ycmd-global-config "/home/yuebenben/ycmd/cpp/ycm/.ycm_extra_conf.py")
@@ -409,7 +410,7 @@ values."
   (spacemacs|diminish which-key-mode)
   (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
   (spacemacs|diminish counsel-mode)
-
+  (spacemacs/toggle-indent-guide-globally-on)
   (evilified-state-evilify-map special-mode-map :mode special-mode)
 
   (add-to-list 'auto-mode-alist
@@ -466,7 +467,7 @@ values."
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
-
+;;(require 'sdcv "~/sdcv/sdcv.el")
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
 (require 'rosemacs-config)
 ;;(require 'slime-config "~/catkin_ws/install/share/slime_ros/slime-config.el")
@@ -530,13 +531,44 @@ values."
 (global-set-key [(control return)] 'company-complete-common)
 ;;(define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
 (add-hook 'magit-status-mode-hook (lambda()
-                                      (define-key magit-mode-map [tab] 'magit-section-toggle)))
-    ;; use apsell as ispell backend
-    (setq-default ispell-program-name "aspell")
-    ;; use American English as ispell default dictionary
-    (ispell-change-dictionary "american" t)
+                                    (define-key magit-mode-map [tab] 'magit-section-toggle)))
+;; use apsell as ispell backend
+(setq-default ispell-program-name "aspell")
+;; use American English as ispell default dictionary
+(ispell-change-dictionary "american" t)
 (add-hook 'octave-mode-hook (lambda()
                               company-mode))
 ;; (add-hook 'c++-mode-hook(lambda()
 ;;                              (add-to-list 'yas-snippet-dirs "/opt/ros/kinetic/share/emacs/site-lisp/snippets"))
 ;;                              )
+(spacemacs/set-leader-keys "oy" 'kid-sdcv-to-buffer)
+;; (global-set-key (kbd "C-c d") 'kid-sdcv-to-buffer)
+(defun kid-sdcv-to-buffer ()
+  (interactive)
+  (let ((word (if mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                  (current-word nil t))))
+     ;; (setq word (read-string (format "Search the dictionary for (default %s): " word)
+     ;;                         nil nil word))
+
+    (set-buffer (get-buffer-create "*sdcv*"))
+    (buffer-disable-undo)
+    (erase-buffer)
+    (let ((process (start-process-shell-command "sdcv" "*sdcv*" "sdcv" "-n" word)))
+      (set-process-sentinel
+       process
+       (lambda (process signal)
+         (when (memq (process-status process) '(exit signal))
+           (unless (string= (buffer-name) "*sdcv*")
+             (setq kid-sdcv-window-configuration (current-window-configuration))
+             (switch-to-buffer-other-window "*sdcv*")
+             (local-set-key (kbd "d") 'kid-sdcv-to-buffer)
+             (local-set-key (kbd "q") (lambda ()
+                                        (interactive)
+                                        (bury-buffer)
+                                        (unless (null (cdr (window-list))) ; only one window
+                                          (delete-window)))))
+           (goto-char (point-min))))))))
+
+
+
